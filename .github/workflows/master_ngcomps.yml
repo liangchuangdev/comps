@@ -24,8 +24,9 @@ jobs:
       - name: npm install and build
         run: |
           npm install
-          npm run build --if-present
-
+          npm run build
+        working-directory: .
+      
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v2
         with:
@@ -50,6 +51,5 @@ jobs:
         uses: azure/webapps-deploy@v2
         with:
           app-name: 'ngcomps'
-          slot-name: 'Production'
           publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_EBD869AC023B4BF19EE40C02FCE7E61A }}
           package: ./dist/comps
